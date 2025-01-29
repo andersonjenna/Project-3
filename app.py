@@ -11,6 +11,11 @@ from flask import Flask, jsonify
 import pandas as pd
 import sqlite3
 import os
+from flask_cors import CORS
+
+
+
+# Apply CORS to your app
 
 # Load Data
 csv_path = 'Resources/spreadspoke_scores.xlsx'
@@ -22,8 +27,12 @@ games = pd.read_excel(csv_path)
 games['scheduleDate'] = pd.to_datetime(games['scheduleDate'])
 games = games[games['scheduleDate'] >= '2002-06-01' ]
 
+games.fillna("NA", inplace=True)
+
 
 teams = pd.read_csv(csv_path2)
+teams.fillna("NA", inplace=True)
+
 print(teams.head())
 print(games.head())
 
@@ -31,6 +40,8 @@ print(games.head())
 #Flask
 
 app = Flask(__name__)
+CORS(app)
+
 
 @app.route("/")
 def welcome():
