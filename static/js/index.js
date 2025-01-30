@@ -7,7 +7,7 @@ let apiUrl = 'http://127.0.0.1:5000/games'
 
 d3.json(apiUrl)
   .then(data => {
-    console.log("API Data:", data);
+    //console.log("API Data:", data);
   });
 
 
