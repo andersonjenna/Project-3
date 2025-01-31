@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta hhtp-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Weather Data</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.js" integrity="sha512-7DgGWBKHddtgZ9Cgu8aGfJXvgcVv4SWSESomRtghob4k4orCBUTSRQ4s5SaC2Rz+OptMqNk0aHHsaUBk6fzIXw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    
+    <script>
+    
+      getData();
+
+      async function getData(){
+        const response = await fetch('weatherGames.csv');
+        const data = await response.text();
+
+        const table = data.split('\n').slice(1);
+        table.forEach(row => {
+          const columns = row.split(',');
+          const date = columns[0];
+          const teamScore = columns[6];
+          const team = columns[7];
+          const gameResult = columns[9];
+          const temp = columns[15];
+          console.log(team, teamScore, gameResult, temp, date);
+        });
+      };
+
+    </script>
+    <div class="container">
+        <h1>Cold Weather Data For Warm Weather Teams</h1>
+        <div class="select-box">
+          <div class="input-container">
+            <input
+              type="text"
+              class="selected"
+              placeholder="Select Warm Weather Team"
+            />
+            <i class="fa-solid fa-arrow-down" id="arrow"></i>
+          </div>
+          <ul class="options-container">
+            <li class="option"><i class="fa-solid fa-crow"></i> Arizona Cardinals</li>
+            <li class="option"><i class="fa-solid fa-crow"></i> Atlanta Falcons</li>
+            <li class="option"><i class="fa-solid fa-cat"></i> Carolina Panthers</li>
+            <li class="option"><i class="fa-solid fa-hat-cowboy"></i> Dallas Cowboys</li>
+            <li class="option"><i class="fa-solid fa-hat-cowboy-side"></i> Houston Texans</li>
+            <li class="option"><i class="fa-solid fa-cat"></i> Jacksonville Jaguars</li>
+            <li class="option"><i class="fa-solid fa-skull-crossbones"></i> Las Vegas Raiders</li>
+            <li class="option"><i class="fa-solid fa-bolt"></i> Los Angeles Chargers</li>
+            <li class="option"><i class="fa-solid fa-horse-head"></i> Los Angeles Rams</li>
+            <li class="option"><i class="fa-solid fa-fish-fins"></i> Miami Dolphins</li>
+            <li class="option"><i class="fa-solid fa-hat-wizard"></i> New Orleans Saints</li>
+            <li class="option"><i class="fa-solid fa-helmet-un"></i> San Francisco 49ers</li>
+            <li class="option"><i class="fa-solid fa-skull-crossbones"></i> Tampa Bay Buccaneers</li>
+            <li class="option"><i class="fa-solid fa-t"></i> Tennesee Titans</li>
+            <li class="option"><i class="fa-solid fa-helmet-un"></i> </li>
+            <li class="option"><i class="fa-solid fa-helmet-un"></i> </li>
+          </ul>
+        </div>
+      </div>
+      <script src="weather.js"></script>
+      <div class="result">
+        <div class="pie-chart-container">
+          <canvas id="pie-chart" class="animate-pie-chart" width="600" height="600"></canvas>
+          <ul id="pie-chart-legend"></ul>
+        </div>
+    </div>
+</body>
+</html>
