@@ -1,58 +1,90 @@
+let gamesapi = 'http://127.0.0.1:5000/games';
+let teamsapi = 'http://127.0.0.1:5000/teams';
 
+d3.json(teamsapi).then(teamData => {
+  console.log("Teams Data:", teamData);
 
+  let teamSelect = document.getElementById('teamSelect');
+  let teams = Object.keys(teamData);
 
+  for (let i = 0; i < teams.length; i++) {
+    let team = teamData[i].team_name;
+    let option = document.createElement('option');
+    option.value = team;
+    option.textContent = team;
+    teamSelect.appendChild(option);
+  }
 
-let apiUrl = 'http://127.0.0.1:5000/games'
-//let apiUrl = 'http://127.0.0.1:5000/teams'
+  let currentTeam = teams[0];
+  updateChart(currentTeam);
 
-d3.json(apiUrl)
-  .then(data => {
-    console.log("API Data:", data);
+  teamSelect.addEventListener('change', function() {
+    currentTeam = this.value;
+    updateChart(currentTeam);
+    console.log(currentTeam)
   });
+});
 
+let ctx = document.getElementById('lineChart').getContext('2d');
+let lineChart;
 
+function updateChart(TeamName) {
+  d3.json(gamesapi).then(gameData => {
+    console.log("Games Data:", gameData);
 
+    let wins = 0;
+    let losses = 0;
+    let ties = 0;
 
+    for (let i = 0; i < gameData.length; i++) {
+      let game = gameData[i];
 
+      if (game.teamHome === TeamName) {
+        if (game.homeResult === 'WIN') { wins++ }
+        if (game.homeResult === 'TIE') { ties++ }
+        if (game.homeResult === 'LOSS') { losses++ }
+      }
 
+      if (game.teamAway === TeamName) {
+        if (game.awayResult === 'WIN') { wins++ }
+        if (game.awayResult === 'TIE') { ties++ }
+        if (game.awayResult === 'LOSS') { losses++ }
+      }
+    }
 
+    if (lineChart) {
+      lineChart.destroy();
+    }
 
-// Select the text of an HTML element
-// let text1 = d3.select(".text1").text();
-// console.log("text1 says: ", text1);
-
-// let text2 = d3.select("#text2").text();
-// console.log("text2 says: ", text2);
-
-// // Modify the text of an HTML element
-// d3.select(".text1").text("Hey, I changed this!");
-
-// // Capture the HTML of a selection
-// let myLink = d3.select(".my-link").html();
-// console.log("my-link: ", myLink);
-
-// // Select an element's child element
-// // An object is returned
-// let myLinkAnchor = d3.select(".my-link>a");
-// console.log(myLinkAnchor);
-
-// // Capture the child element's href attribute
-// let myLinkAnchorAttribute = myLinkAnchor.attr("href");
-// console.log("myLinkAnchorAttribute: " + myLinkAnchorAttribute);
-
-// // Change an element's attribute
-// myLinkAnchor.attr("href", "https://python.org");
-
-// // Use chaining to join methods
-// d3.select(".my-link>a").attr("href", "https://nytimes.com").text("Now this is a link to the NYT!!");
-
-// // Select all list items, then change their font color
-// d3.selectAll("li").style("color", "blue");
-
-// // Create a new element
-// let li1 = d3.select("ul").append("li");
-// li1.text("A new item has been added!");
-
-// // Use chaining to create a new element and set its text
-// let li2 = d3.select("ul").append("li").text("Another new item!");
-
+    lineChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Results'],
+          datasets: [
+            {
+              label: 'Wins',
+              data: [wins],
+              backgroundColor: 'rgba(30, 196, 21, 0.99)'
+            },
+            {
+              label: 'Losses',
+              data: [losses],
+              backgroundColor: 'rgba(214, 7, 7, 0.66)'
+            },
+            {
+                label: 'Ties',
+                data: [ties],
+                backgroundColor: 'rgba(231, 238, 38, 0.66)'
+              }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    });
+  }
