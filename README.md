@@ -44,6 +44,13 @@ We utilized publicly available data from Kaggle, which can be found here:
 
 Angel with the Tutoring Center and ChatGPT were used to debug code.
 
+Links to all resources used for the index.html, weather.js, and style.css within the weather data folder are listed below:
+- Link for video used to create dropdown menu: https://youtu.be/XCAUnA4FyHU?si=wVOjLIVkcH8EHa8K
+- Link for font awesome used for fonts and icons: https://cdnjs.com/libraries/font-awesome https://fontawesome.com/search?ic=free
+- Link for data parsing and chart creation: https://youtu.be/5-ptp9tRApM?si=w0z61DQMi1xhiYbN
+
+Additional help for code and debugging from Thomas Bogue.
+
 ---
 
 This project was developed as part of the U of MN Data Analytics Bootcamp.
