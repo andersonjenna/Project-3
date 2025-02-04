@@ -1,10 +1,12 @@
 let gamesUrl = "http://127.0.0.1:5000/games";
 
 d3.json(gamesUrl).then(function(data) {
+
     let gamesData = data;
     var scoresData=[];
     var differenceData=[];
     var layout1;
+
     for(let i = 0; i < gamesData.length; i++){
         // Comparing the winning teams scores each season
         if(gamesData[i].homeResult === 'WIN'){
@@ -28,6 +30,7 @@ d3.json(gamesUrl).then(function(data) {
                 title: {
                     text: "Football season"
                 }, 
+                type: 'category'
             },
             showlegend: false,
             
@@ -48,7 +51,8 @@ d3.json(gamesUrl).then(function(data) {
             xaxis: {
                 title: {
                     text: "Football season"
-                } 
+                },
+                type: 'category' 
             },
             showlegend: false
         }
