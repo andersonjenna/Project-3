@@ -42,6 +42,7 @@ Ultimately, we decided against this approach for several reasons:
 We utilized publicly available data from Kaggle, which can be found here:
 [NFL Scores and Betting Data](https://www.kaggle.com/datasets/tobycrabtree/nfl-scores-and-betting-data)
 
+Angel with the Tutoring Center and ChatGPT were used to debug code.
 ---
 
 This project was developed as part of the U of MN Data Analytics Bootcamp.
