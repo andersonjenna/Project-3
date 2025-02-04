@@ -44,12 +44,6 @@ function updateChart(TeamName) {
         if (game.homeResult === 'TIE') { ties++ }
         if (game.homeResult === 'LOSS') { losses++ }
       }
-
-      if (game.teamAway === TeamName) {
-        if (game.awayResult === 'WIN') { wins++ }
-        if (game.awayResult === 'TIE') { ties++ }
-        if (game.awayResult === 'LOSS') { losses++ }
-      }
     }
 
     if (lineChart) {
