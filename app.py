@@ -23,13 +23,14 @@ print(games.head())
 teams = pd.read_sql('SELECT * FROM teams', conn)
 print(teams.head())
 
-
-
-
-#Edit Dataframes before sending data
+warm_teams = pd.read_sql('SELECT * FROM games WHERE weatherTemp IS NOT NULL AND weatherTemp <= 32', conn)
+print(warm_teams.head())
 
 games['scheduleDate'] = pd.to_datetime(games['scheduleDate'])
 games = games[games['scheduleDate'] >= '2002-06-01' ]
+
+# warm_team_games = games.dropna(subset = ['weatherTemp'])
+# warm_team_games['weatherTemp'] = warm_team_games['weatherTemp'].astype(int)
 
 games.fillna("NA", inplace=True)
 
@@ -51,7 +52,8 @@ def welcome():
     return (
         f"Available Routes:<br>"
         f"/games<br>"
-        f"/teams"
+        f"/teams<br>"
+        f"/warmWeatherTeams"
     )
     
 
@@ -64,10 +66,13 @@ def gamesAPI():
 
 @app.route("/teams")
 def teamsAPI():
-   
 
     return jsonify(teams.to_dict(orient='records'))
 
+@app.route("/warmWeatherTeams")
+def warmAPI():
+    
+    return jsonify(warm_teams.to_dict(orient='records'))
 
 if __name__ == '__main__':
     app.run(debug=True)

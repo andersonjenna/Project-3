@@ -40,8 +40,6 @@
             <li class="option"><i class="fa-solid fa-helmet-un"></i> San Francisco 49ers</li>
             <li class="option"><i class="fa-solid fa-skull-crossbones"></i> Tampa Bay Buccaneers</li>
             <li class="option"><i class="fa-solid fa-t"></i> Tennessee Titans</li>
-            <li class="option"><i class="fa-solid fa-helmet-un"></i> </li>
-            <li class="option"><i class="fa-solid fa-helmet-un"></i> </li>
           </ul>
         </div>
       </div>
@@ -82,7 +80,9 @@
   
         async function getData(){
           const response = await fetch('weatherGames.csv');
+          // const data1 = await fetch('http://127.0.0.1:5000/warmWeatherTeams')
           const data = await response.text();
+          // console.log('data!!!', data1 )
   
           let input = teamName;
           console.log(input);

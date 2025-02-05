@@ -13,7 +13,7 @@ In this repository, you will find:
 
 1. Clone the repository:
    ```sh
-   git clone <https://github.com/andersonjenna/Project-3.git>
+   git clone https://github.com/andersonjenna/Project-3.git
    ```
 2. Install all dependencies (these can be found at the top of the `app.py` file):
 
@@ -24,6 +24,7 @@ In this repository, you will find:
    Copy the URL displayed in the terminal if you wish to view the API directly in your browser.
 
 4. Navigate to any of the dashboard folders and open the `index.html` file to view the data visualizations.
+5. For the Weather Data, please open this in VS code (or your IDE of choice) and open in live server.
 
 ## Ethical Considerations
 
